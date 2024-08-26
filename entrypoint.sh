@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 set -e
 
-REPO_NAME="xgugugu"
-REPO_URL="https://xgugugu.github.io/aur/"
+# REPO_NAME="xgugugu"
+# REPO_URL="https://xgugugu.github.io/aur/"
 
 pacman -Syu base-devel git wget --noconfirm
 

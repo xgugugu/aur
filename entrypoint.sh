@@ -27,8 +27,9 @@ sudo -H -u buildaur mkdir build
     )
 )
 
+# build packages
 for pkgname in $(cat ./packages.txt); do
     sudo -H -u buildaur yay -S "${pkgname}" --noconfirm --builddir ./build
 done
 
-ls -lh .
+ls -R .

@@ -1,1 +1,1 @@
-cpeditor
+bun-bin

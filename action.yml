@@ -1,0 +1,6 @@
+name: AUR
+description: AUR
+
+runs:
+  using: "docker"
+  image: "Dockerfile"

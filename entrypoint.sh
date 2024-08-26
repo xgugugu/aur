@@ -32,4 +32,13 @@ for pkgname in $(cat ./packages.txt); do
     sudo -H -u buildaur yay -S "${pkgname}" --noconfirm --builddir ./build
 done
 
-ls -R .
+# add repo pkgs
+mkdir dist
+cp ./build/*/*.pkg.tar.zst ./dist || true
+(
+    if [ -f ./repo.txt ]; then
+        wget -O ./xgugugu.db.tar.gz "$(cat ./repo.txt)/xgugugu.db.tar.gz"
+    fi
+    repo-add ./xgugugu.db.tar.gz ./*.pkg.tar.zst || true
+    ls .
+)

@@ -12,12 +12,14 @@ chmod -R a+rw .
 if [ -f ./repo.txt ]; then
     repocfg="\n[custom]\nSigLevel = Optional TrustAll\nServer"
     repourl=$(cat ./repo.txt)
-    echo "${repocfg} = ${repourl}" >>/etc/pacman.conf
+    echo -e "${repocfg} = ${repourl}" >>/etc/pacman.conf
     pacman -Syu
 fi
 
 # install or build yay
-if sudo -H -u buildaur pacman -Sy yay --noconfirm; then
+if pacman -Sy yay --noconfirm; then
+    echo "install yay from pacman"
+else
     sudo -H -u buildaur mkdir build
     (
         cd build

@@ -12,7 +12,7 @@ echo "buildaur ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 chmod -R a+rw .
 
 # add old repo
-if [[ $OLD_REPO_URL ]]; then
+if [[ $REPO_URL ]]; then
     repocfg="\n[${REPO_NAME}]\nSigLevel = Optional TrustAll\nServer = ${REPO_URL}"
     echo -e "${repocfg}" >>/etc/pacman.conf
     pacman -Syu

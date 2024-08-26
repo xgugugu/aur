@@ -16,16 +16,18 @@ if [ -f ./repo.txt ]; then
     pacman -Syu
 fi
 
-# build yay
-sudo -H -u buildaur mkdir build
-(
-    cd build
-    sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git
+# install or build yay
+if sudo -H -u buildaur pacman -Sy yay --noconfirm; then
+    sudo -H -u buildaur mkdir build
     (
-        cd yay
-        sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
+        cd build
+        sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git
+        (
+            cd yay
+            sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
+        )
     )
-)
+fi
 
 # build packages by yay
 for pkgname in $(cat ./packages.txt); do

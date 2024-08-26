@@ -36,6 +36,7 @@ done
 mkdir dist
 cp ./build/*/*.pkg.tar.zst ./dist || true
 (
+    cd dist
     if [ -f ./repo.txt ]; then
         wget -O ./xgugugu.db.tar.gz "$(cat ./repo.txt)/xgugugu.db.tar.gz"
     fi

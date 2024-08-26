@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 set -e
 
+OLD_REPO_URL="https://xgugugu.github.io/aur/"
+
 pacman -Syu base-devel git --noconfirm
 
 # add user 'buildaur'
@@ -9,7 +11,7 @@ echo "buildaur ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 chmod -R a+rw .
 
 # add old repo
-if [ -f ./repo.txt ]; then
+if [[ $OLD_REPO_URL ]]; then
     repocfg="\n[custom]\nSigLevel = Optional TrustAll\nServer"
     repourl=$(cat ./repo.txt)
     echo -e "${repocfg} = ${repourl}" >>/etc/pacman.conf
@@ -41,8 +43,8 @@ mkdir dist
 cp ./build/*/*.pkg.tar.zst ./dist || true
 (
     cd dist
-    if [ -f ./repo.txt ]; then
-        wget -O ./xgugugu.db.tar.gz "$(cat ./repo.txt)/xgugugu.db.tar.gz"
+    if [[ $OLD_REPO_URL ]]; then
+        wget -O ./xgugugu.db.tar.gz "${OLD_REPO_URL}/xgugugu.db.tar.gz"
     fi
     repo-add ./xgugugu.db.tar.gz ./*.pkg.tar.zst || true
     ls .

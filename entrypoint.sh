@@ -4,7 +4,7 @@ set -e
 REPO_NAME="xgugugu"
 # REPO_URL="https://xgugugu.github.io/aur/"
 
-pacman -Syu base-devel git wget tree --noconfirm
+pacman -Syu base-devel git wget --noconfirm
 
 # add user 'buildaur'
 useradd buildaur -m
@@ -47,6 +47,5 @@ cp ./build/*/*.pkg.tar.zst ./dist || true
         wget -O "./${REPO_NAME}.db.tar.gz" "${REPO_URL}/${REPO_NAME}.db.tar.gz"
     fi
     repo-add "./${REPO_NAME}.db.tar.gz" ./*.pkg.tar.zst || true
-    tree -H '.' -L 1 --noreport --charset utf-8 -o index.html
     ls .
 )

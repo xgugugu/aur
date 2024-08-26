@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 set -e
 
-OLD_REPO_URL="https://xgugugu.github.io/aur/"
+REPO_NAME="xgugugu"
+REPO_URL="https://xgugugu.github.io/aur/"
 
 pacman -Syu base-devel git --noconfirm
 
@@ -12,9 +13,8 @@ chmod -R a+rw .
 
 # add old repo
 if [[ $OLD_REPO_URL ]]; then
-    repocfg="\n[custom]\nSigLevel = Optional TrustAll\nServer"
-    repourl=$(cat ./repo.txt)
-    echo -e "${repocfg} = ${repourl}" >>/etc/pacman.conf
+    repocfg="\n[${REPO_NAME}]\nSigLevel = Optional TrustAll\nServer = ${REPO_URL}"
+    echo -e "${repocfg}" >>/etc/pacman.conf
     pacman -Syu
 fi
 
@@ -43,9 +43,9 @@ mkdir dist
 cp ./build/*/*.pkg.tar.zst ./dist || true
 (
     cd dist
-    if [[ $OLD_REPO_URL ]]; then
-        wget -O ./xgugugu.db.tar.gz "${OLD_REPO_URL}/xgugugu.db.tar.gz"
+    if [[ $REPO_URL ]]; then
+        wget -O "./${REPO_NAME}.db.tar.gz" "${REPO_URL}/${REPO_NAME}.db.tar.gz"
     fi
-    repo-add ./xgugugu.db.tar.gz ./*.pkg.tar.zst || true
+    repo-add "./${REPO_NAME}.db.tar.gz" ./*.pkg.tar.zst || true
     ls .
 )

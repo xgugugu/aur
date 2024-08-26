@@ -24,7 +24,7 @@ if [ -f ./repo.txt ]; then
 fi
 
 mkdir build
-for pkgname in $(cat filename); do
+for pkgname in $(cat ./packages.txt); do
     sudo -H -u yay -S "${pkgname}" --noconfirm --builddir ./build
 done
 

@@ -19,10 +19,10 @@ if [[ $REPO_URL ]]; then
 fi
 
 # install or build yay
+sudo -H -u buildaur mkdir build
 if pacman -Sy yay --noconfirm; then
     echo "install yay from pacman"
 else
-    sudo -H -u buildaur mkdir build
     (
         cd build
         sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git

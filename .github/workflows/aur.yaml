@@ -1,6 +1,7 @@
 name: AUR
 
 on:
+  push:
   schedule:
     - cron: "1 */12 * * *"
 

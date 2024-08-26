@@ -9,9 +9,9 @@ echo "buildaur ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 chmod -R a+rw .
 
 # build yay
-git clone https://aur.archlinux.org/yay.git
+sudo -H -u git clone https://aur.archlinux.org/yay.git
 (
-    cd yay
+    sudo -H -u cd yay
     sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
 )
 

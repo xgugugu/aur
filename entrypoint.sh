@@ -8,13 +8,6 @@ useradd buildaur -m
 echo "buildaur ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 chmod -R a+rw .
 
-# build yay
-sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git
-(
-    cd yay
-    sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
-)
-
 # add old repo
 if [ -f ./repo.txt ]; then
     repocfg="\n[custom]\nSigLevel = Optional TrustAll\nServer"
@@ -23,9 +16,19 @@ if [ -f ./repo.txt ]; then
     pacman -Syu
 fi
 
-mkdir build
+# build yay
+sudo -H -u buildaur mkdir build
+(
+    cd build
+    sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git
+    (
+        cd yay
+        sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
+    )
+)
+
 for pkgname in $(cat ./packages.txt); do
-    sudo -H -u yay -S "${pkgname}" --noconfirm --builddir ./build
+    sudo -H -u buildaur yay -S "${pkgname}" --noconfirm --builddir ./build
 done
 
 ls -lh .

@@ -4,7 +4,7 @@ set -e
 REPO_NAME="xgugugu"
 REPO_URL="https://xgugugu.github.io/aur/"
 
-pacman -Syu base-devel git --noconfirm
+pacman -Syu base-devel git wget --noconfirm
 
 # add user 'buildaur'
 useradd buildaur -m

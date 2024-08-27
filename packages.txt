@@ -1,3 +1,4 @@
 bun-bin
 cpeditor
 ruffle-nightly-bin
+ruffle-git

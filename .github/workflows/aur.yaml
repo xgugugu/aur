@@ -17,3 +17,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           keep_files: true
+      - uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          tag: "aur"
+          artifacts: "./dist/*.*"
+          token: ${{ secrets.GITHUB_TOKEN }}

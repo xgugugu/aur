@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          keep_files: true
       - uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true

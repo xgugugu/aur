@@ -20,9 +20,9 @@ fi
 
 # install or build yay
 sudo -H -u buildaur mkdir build
-if pacman -Sy yay --noconfirm; then
-    echo "install yay from pacman"
-else
+# if pacman -Sy yay --noconfirm; then
+    # echo "install yay from pacman"
+# else
     (
         cd build
         sudo -H -u buildaur git clone https://aur.archlinux.org/yay.git
@@ -31,7 +31,7 @@ else
             sudo -H -u buildaur makepkg --syncdeps --install --noconfirm
         )
     )
-fi
+# fi
 
 # build packages by yay
 for pkgname in $(cat ./packages.txt); do

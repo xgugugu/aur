@@ -2,4 +2,3 @@ bun-bin
 cpeditor
 ruffle-nightly-bin
 amdgpu-pro-oglp
-xminesweeper
